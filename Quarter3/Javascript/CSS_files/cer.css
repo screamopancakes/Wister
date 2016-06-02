@@ -1,0 +1,168 @@
+body {
+  background: #17295a;
+  background-image:  url(bluegradient.png), url(https://c2.staticflickr.com/4/3810/9657121103_d1a0b56b60_c.jpg);
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  background-position: bottom, bottom;
+  background-size: 100%, 100%;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-weight: lighter;
+  color: #E8ECED;
+}
+
+
+h1 {
+  color: #175f7a;
+  text-shadow: -1px 0 #aaeeff, 0 1px #aaeeff, 1px 0 #aaeeff, 0 -1px #aaeeff;
+  font-family: 'Dancing Script', cursive;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  font-size: 50;
+  margin: 20px 50px 10px 50px;
+}
+
+a:link{
+  text-decoration: none;
+  color: white;
+  margin: 10px;
+}
+
+a:visited{
+  text-decoration: none;
+  color: white;
+}
+  
+a:hover{
+  text-decoration: none;
+  color: #aaeeff;
+}
+
+ol {
+  margin-right: 10%;
+}
+
+ul {
+  margin-top: -20px;
+  margin-left: -20px;
+}
+
+b {
+  color: white;
+  font-weight: bolder;
+  text-shadow: -1px 0 white;
+}
+.box {
+  background: rgba(0,0,0,0.3);
+  margin: 3%;
+  padding: 2%;
+  border: 1px solid #90C3D4;
+  outline: 5px solid rgba(0,0,0,0.3);
+}  
+
+#head {
+  width: 100%;
+  margin: -8px;
+  padding-bottom: 20px;
+  border-bottom: dashed;
+  border-bottom-width: 1px;
+  border-bottom-color:  #90C3D4;
+  outline: 5px solid #175f7a;
+  position: fixed;
+  z-index: 10;
+  background-color: #175f7a;
+  color: #85B8C9;
+}
+
+select {
+  float: right;
+  margin-right: 30px;
+  margin-top: 30px;
+}
+
+.inter {
+  outline: none;
+  font-family: serif;
+  background: #102A33;
+  color: white;
+  border: 1px #90C3D4 solid;
+  padding-left: 3px;
+}
+
+button {
+  font-family: serif;
+  background: #0C0C38;
+  color: #90C3D4;
+  margin: 10px 0px;
+}
+
+button:active {
+  background: #070726;
+  color: white;
+}
+
+.redform {
+  background: #541512;
+}
+
+/*  */
+#av {
+  height: 50px;
+  width: 50px;
+  border: 1px #0C0C38 solid;
+  float: right;
+  outline: none;
+  margin-top: 25px;
+  margin-right: 10px
+}
+
+#prof {
+  float: right;
+  width: 100px;
+  height: 50px;
+  margin-top: 25px;
+}
+
+#ins {
+   width: 300px;
+    }
+    
+/* needs editing*/
+
+.comm {
+  background: rgba(0,0,30,0.3);
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+  height:100%;
+}
+
+.comReply {
+  background: rgba(0,0,30,0.3);
+  border-top: 1px black solid;
+  width:90%;
+  height:100%;
+  margin-left:10%;
+}
+
+.replyBoxText{
+  outline: none;
+  font-family: monospace;
+  background-color: #7E8763;
+  color:white;
+  border: 1px #D7F542 solid;
+  border-radius: 3px;
+  margin-left:10px;
+  width:97%;
+  height:100px;
+}
+
+.ru {
+  text-decoration: underline;
+}
+
+.unicorn {
+  text-decoration: underline;
+}
+
+.ru:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,63 @@
+<div id='pBasics' class='box'>
+<h2 id='pName'>Username</h2>
+<div id='pavDiv'><img id='pAvatar' src='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'/><span id='paveText' class='editAv'><center>double click<br>to change avatar</center></span></div>
+<table id='pTable' class='plainTable'></table>
+</div>
+<div id='pMain' class='box'>
+Plans for pMain:<br> 
+Tabs to switch between profile comments and car designs or something?
+</div>
+<style>
+#pBasics {
+  float: left;
+  width: 200px;
+  height: 400px;
+  margin-left:10px;
+}
+
+#pavDiv {
+  width:170px;
+  height:170px;
+  margin-left: 15px;
+  background: rgb(109,189,44);  
+}
+
+.editAv:hover + #pAvatar{
+  -webkit-filter: brightness(130%) opacity(.6);
+}
+
+#paveText {
+  display: none;
+  color: black;
+  font-weight: 600;
+  z-index: 200;
+  top:200px;
+  left: 80px;
+  position: absolute;
+  
+}
+
+.editAv:hover + #paveText {
+  display: block;
+  
+}
+
+#pAvatar {
+  width:170px;
+  height:170px;
+  background: gray;
+  position: relative;
+}
+
+th {
+  text-align: right;
+}
+
+#pMain {
+  margin-left: 255px;
+  width: 70%;
+}
+</style>
+<script type="text/javascript">
+
+</script>

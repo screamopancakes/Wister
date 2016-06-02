@@ -1,0 +1,38 @@
+<div class='box'>
+  <center><h1>Login</h1></center>
+  <table class='plainTable'>
+  <tr>
+    <td>Name:</td>
+    <td><input id="u" class='inter'/></td>
+  </tr>
+  <tr>
+    <td>Password:</td>
+    <td><input id="p" class='inter' type="password"/></td>
+  </tr>
+  </table>
+  <button id='lo' onclick='slin()'>login</button>
+</div>
+<style>
+#already {
+  display: none;
+}
+</style>
+<script src="functions.js"></script>
+<script type="text/javascript">
+var ins = document.getElementsByTagName('input')
+for (var x = 0; x < ins.length; x++){
+  var i = ins[x]
+  i.onkeyup=function(event){
+      if (event.keyCode == 13){
+          document.getElementById('lo').click()
+      }    
+  }
+}
+
+
+function slin(){
+  var n = ins[0],
+    p = ins[1];
+  lin(n, p,'i')
+}
+</script>

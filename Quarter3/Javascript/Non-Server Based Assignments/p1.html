@@ -1,0 +1,214 @@
+<html>
+<head>
+    <link rel="icon" href="http://3.bp.blogspot.com/-PTty3CfTGnA/TpZOEjTQ_WI/AAAAAAAAAeo/KeKt_D5X2xo/s1600/js.jpg" type="img/jpg"/>
+    <title>P1 | Arruda</title>
+    
+</head>
+    
+<style>
+  body {
+      background-image: url(https://cdn.welovesolo.com/wp-content/uploads/2014/12/p16of4lqkpovl1o2l1ecbbh814s9-details.jpg);
+      background-size: 200px;
+      color: #74CC7C;
+      position: static;
+      font-family: monospace;
+    }
+    
+    h1 {
+      color: #49AFD1;
+    }
+    
+    h2 {
+      margin: 10px;
+    }
+    
+    #head {
+      background: #175E75;
+      top: 0;
+      left: 0;
+      position: fixed;
+      height: 40px;
+      width: 100%;
+      padding: 5px 0px 30px 20px;
+      border-bottom: 3px solid #49AFD1;
+      z-index: 50;
+      
+    }
+    
+    .box {
+      background: #074A4A;
+      border: 3px solid #49D1CA;
+      padding: 10px;
+      padding-left: 10px;
+      margin: 0 auto;
+      width: 80%;
+    }
+    
+    p {
+      text-indent: -2.8em;
+      margin-left: 40px;
+    }
+    
+    b {
+      font-weight: bolder;
+      font-size: 1.2em;
+    }
+    
+</style>
+<body onload='main()'>
+  <div id="head">
+      <h1> JavaScript WS </h1>
+  </div>
+  <br><br><br><br><br><br><br>
+  <div class="box">
+    <h2>Essentials</h2>
+    <p>1a.) Right click, click "Inspect", then view the Console tab.</p>
+    <p>1b.) Just refresh the page.</p>
+    <p>3a.) A local variable can only be referenced within a function, while a global variable can be referenced throughout the webpage. These are declared within and outside of the function, respectively.</p>
+    <p>3b.) The <b>var</b> keyword allows one to declare variables.</p>
+    <p>4a.) Indentation does not matter in JS, but it should be used to organize code for the humans reading it.</p>
+    <p>4b.) Blocks are enclosed in curly brackets, which are used to group sections of code together.</p>
+    
+  </div>
+  
+  <script>
+  
+    function essentials(){
+      console.log("Rebekah Arruda");
+      var n = "Rebekah Arruda";
+      console.log("Hello, "+n);
+    }
+    
+    function logic(){
+      // question 1 //
+      var a = 5, b = 8, c = 4
+      if (a>b && a>c){
+        var x = a
+      }
+      else if (b>a && b>c){
+        var x = b
+      }
+      else if (c>b && c>a){
+        var x = c
+      }
+      else {
+        var x = "none"
+      }
+      console.log("The greatest number of ["+a,b,c+"] is: " + x)
+      var words = ["peaceful", "paper", "protests", "blow", "to", "pieces"]
+      words.sort()
+      console.log(words[0]+" is the first word alphabetically out of",words+"\n")
+      var d = words.indexOf('paper')
+      if (d == 1){
+        words.splice(d,1)
+        var e = words.indexOf('pieces')
+        if (e > -1){
+          words.splice(e,1)
+          words.push('paper')
+          words.push('pieces')
+          if (words.length == 4 || words.length == 6){
+            var f = ['with the','confetti','cannons','of the', 'preemptive', 'police']
+            words = words.concat(f)
+            console.log(words)
+          }
+        }
+      } else if (d !== 1 && words.length == 6){
+        console.log("Alphabetical order failed?")
+      
+      } else if (d!==1 && words.length!==6)
+        console.log("The initial list was modified.")
+    }
+    
+    function strings(){
+      var a = "Apfel"
+      var b = a.indexOf("p")
+      var c = a.slice(b,3)
+      console.log(a)
+      console.log(c)
+      a = a.replace("A","das ")
+      var d = a.toUpperCase()
+      console.log(d)
+      var e = d.charAt(7)
+      d = d.replace(e,"RD")
+      d = d.split("")
+      var f = d.length
+      console.log("Length:",f)
+      console.log(d[0],d[f-1])
+      for(var i=0; i<f;i++){
+        console.log(d[i])
+      }
+    }
+    
+    function array(){
+      var a = ['peppers','cauliflower','polenta']
+      var b = ['hatred','malice','fury']
+      a = a.concat(b)
+      var c = a.indexOf('malice')
+      var d = a.join(' + ')
+      console.log(d)
+      a.pop()
+      a.push('joy')
+      a.reverse()
+      a.shift()
+      a.unshift('happiness')
+      console.log(a)
+      a.splice(1,2)
+      console.log(a)
+    }
+    
+    function loops(){
+      var n = 1
+      while (n < 11){
+        console.log(n)
+        n++
+      }
+      for (var p=1; p < 11; p++){
+        console.log(p)
+      }
+      var h = 'arbitrary'
+      for (var c = 0;c<h.length;c++){
+        console.log(h.charAt(c))
+      }
+      var f = ['boredom','frustration','elation','morbidity']
+      for (var q = 0;q<f.length;q++){
+        console.log(f[q])
+      }
+    }
+
+    function funobj(){
+      function yahoo(){
+        return "I'm benighted."
+      }
+      console.log(yahoo())
+      var apple = {
+        color: "red",
+      }
+      apple.weight = 0.5
+      console.log(apple.color)
+      console.log(apple.weight)
+      function define(word,def){
+        var a = {
+          w: word,
+          d: def
+        }
+        return a
+      }
+      var s=define("yahoo"," a person who is very rude, loud, or stupid")
+      console.log(s.w)
+      function getDef(e){
+        return e.d
+      }
+      console.log(getDef(s))
+    }
+
+    function main(){
+      essentials()
+      logic()
+      strings()
+      array()
+      loops()
+      funobj()
+    }
+  </script>
+</body>
+</html>

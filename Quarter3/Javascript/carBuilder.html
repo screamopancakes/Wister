@@ -1,0 +1,61 @@
+
+<center>
+<table id ='carForm' class='carTable'>
+    <tr><th colspan='2'>Build</th></tr>
+    <tr><td>Name</td><td><input id ="makeInput" class='inter' type="text" maxlength="100" size="30" ></td></tr>
+    <tr><td>Interests</td><td><input id ="modelInput" class='inter' type="text" maxlength="100" size="30" ></td></tr>
+    <tr><td>Gender</td><td>
+                                <input type="radio" name="tran" value="Manu">Androgynous <br>
+                                <input type="radio" name="tran" value="Auto">Female <br>
+                                <input type="radio" name="tran" value="Auto">Male <br></td></tr>
+    <tr><td>Held Object</td><td><select id="cars" name='cars' class='inter'> <!-- This totally needs a better name, but I can't think of one, I plan on adding other things that aren't laptops eventually, maybe? (notebook, cat, dog :3 ) But for now, this is the basic thing because wanting something simple working-->
+                              <option value="">None</option>
+                              <option value="Volvo">Dell Laptop</option>
+                              <option value=''>HP Laptop</option>
+                              <option value="Saab">MacBook</option>
+                              </td></tr>
+    <tr><td>Accessories</td><td>
+                                <input type="checkbox" name="extras" value="Seats">Scarf<br>
+                                <input type="checkbox" name="extras" value="Sounds">Glasses<br></td></tr>
+
+    <tr><td colspan='2'><center><input type='submit' onclick='processCars()' class='button' value='Submit'></center></td></tr>
+</table>
+</center>
+<br><center>
+<table id='carPost' class='carTable'>
+    <tr><th colspan='5' >View</th></tr>
+    <tr><th>Make</th><th>Model</th><th>Style</th><th>Transmission</th><th>Options</th></tr>
+    
+</table>
+</center>
+<script>
+    function submit(){
+        var postData=[];
+        postData.push(document.getElementById('makeInput').value);
+        postData.push(document.getElementById('modelInput').value);
+        postData.push(document.getElementById('cars').value);
+        var tran=document.getElementsByName('tran');
+        for (var i=0;i<tran.length;i++){
+            if (tran[i].checked){
+                postData.push(tran[i].value);
+            }
+        }
+        var options=document.getElementsByName('extras');
+        var optionsList=[];
+        for (var i=0;i<options.length;i++){
+            if (options[i].checked){
+                optionsList.push(options[i].value);
+            }
+        }
+        postData.push(optionsList.join(', '));
+        
+        var tableRow=document.createElement('tr');
+        for (var i=0;i<postData.length;i++){
+            var tableData=document.createElement('td');
+            var text=document.createTextNode(postData[i]);
+            tableData.appendChild(text);
+            tableRow.appendChild(tableData);
+        }
+        document.getElementById('carPost').appendChild(tableRow);
+    }
+</script>

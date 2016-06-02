@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+
+<style>
+</style>
+  <div id='chatBox' class='box'>
+    <table id='chatTable'></table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div id='chatType' class='box'>
+  <input id='msgInput' type='text' placeholder='Enter Message' onkeydown="if (event.keyCode == 13)document.getElementById('chatBut').click()">
+  <button id='chatBut' onclick='message(document.getElementById("msgInput").value)'>Send</button></div>
+<script>
+if (typeof(chatRoomLoaded) == 'undefined') {
+    var chatRoomLoaded = true;
+    
+  socket.on('message',function(who,message){
+    var row=document.createElement('tr')
+    var name=document.createElement('td')
+    name.appendChild(document.createTextNode(who+': '+message))
+    row.appendChild(name)
+    var d= new Date()
+    var time=document.createElement('td')
+    time.appendChild(document.createTextNode(d.toTimeString().split(' ')[0]))
+    time.style.textAlign='right'
+    row.appendChild(time)
+    document.getElementById('chatTable').appendChild(row)
+    scroll()
+  })
+  
+  function message(msg){
+  document.getElementById('msgInput').value=''
+  msg=msg.split(' ')
+  var temp=[]
+  for (var i=0;i<msg.length;i++){
+   if(/shit|damn|fuck|bitch|nigger|cunt|whore|spic|kike|chink|dick/.test(msg[i].toLowerCase()))
+    temp.push('*'.repeat(msg[i].length))
+  else
+    temp.push(msg[i])
+  }
+  msg=temp.join(' ')
+  if(msg!=''){
+    if(msg.split('')[0]=='/')
+      chatParse(getCookie('name'),msg.split(' ')[0],msg.split(' ')[1],msg)
+    else
+      socket.emit('message',getCookie('name'),msg)}
+  }
+  
+  function scroll(){
+    var objDiv = document.getElementById("chatBox");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+  
+  socket.on('whisper',function(who,msg,who2){
+    var row=document.createElement('tr')
+    var text=document.createElement('td')
+    text.className='whisper'
+    if(getCookie('name')!=who)
+      if(getCookie('admin')!='flarf')
+        text.appendChild(document.createTextNode(who+' whispered to you: '+msg))
+      else
+        text.appendChild(document.createTextNode(who+' whispered to '+who2+': '+msg))
+    else
+      text.appendChild(document.createTextNode('You whispered to '+who2+': '+msg))
+    row.appendChild(text)
+    var d= new Date()
+    var time=document.createElement('td')
+    time.appendChild(document.createTextNode(d.toTimeString().split(' ')[0]))
+    time.style.textAlign='right'
+    row.appendChild(time)
+    document.getElementById("chatTable").appendChild(row)
+  })
+}
+</script>

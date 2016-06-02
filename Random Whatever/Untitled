@@ -1,0 +1,101 @@
+import room, player
+Room = room.Room
+Item = room.Item
+
+print("Welcome to Pyzork!")
+class Game:
+    
+    # constructor: create a Game object
+    #   initialize your game in here
+    def __init__(self):        
+        #rooms
+        centertown= Room("Center of Town", "An intersection of multiple ways, housing is to the east, roads to the south and west, and a jungle to the north.")
+        road=Room("Road", "A well-travelled path. The center of town is to the east, a tavern to the north, and a store to the south.")
+        centertown.connect_to(road, 'W')
+        store= Room("Store", "Items line the walls and shelves, but the shopkeeper is not here right now. The door to the road is to the north.")
+        store.connect_to(road, 'N')
+        apple = Item("Apple","A round, red fruit.")
+        store.add_items(apple)
+        tavern= Room("Tavern", "Drinks are clattling about while drunken men loudly converse with one another. The bartender does not appear to be willing to serve you at the moment. The door is to the south.")
+        tavern.connect_to(road, "S")
+        home=Room("Home", "You live here. Your mother is in pain, sleeping on the bed in the corner. The door is to the south.")
+        neighborhood= Room("Neighborhood", "This is where everyone in the town lives. Your house is to the north. The town healer lives to the south. The neighborhood continues to the east.")
+        neighborhood.connect_to(home, "N")
+        neighborhood.connect_to(centertown, "W")
+        neighborhood2=Room("Neighborhood", "The neighborhood continues to the east, your house and the town healer are to the west.")
+        neighborhood2.connect_to(neighborhood2, "W")
+        neighborhood2.connect_to(neighborhood, "E")
+        roadbot= Room("Road", "The path leads south to other towns in which you have no business. Shouldn't you be trying to save your mother? The center of town is to the north.")
+        roadbot.connect_to(centertown, "N")
+        healinghouse= Room("Residence of the town healer", "The town healer lives here with his wife and two children. He is currently preparing medicines in his lab to the west. The door out is to the north.")
+        healinghouse.connect_to(neighborhood, "N")
+        lab= Room("Lab", "Flasks with colored liquids and body parts of animals line the shelves. Papers are scatterered about a desk. The town healer is bent over the desk, experimenting. the door is to the east.")
+        lab.connect_to(healinghouse, "W")
+        #I honestly don't know where else to do this
+        self.PC = player.Player(home)
+
+    # print function for debugging
+    #   calls print for all rooms
+    def print_rooms( self ):
+        pass
+
+
+    
+    # process given command
+    #   params is a list of arguments 
+    def process_cmd( self, cmd, args):
+    
+        commdict = {
+            'look' : player.Player.look,
+            'l' : player.Player.look, 
+            'examine' : player.Player.look,
+            'look at' : player.Player.look,
+            'take' : player.Player.take,
+            'pick up' : player.Player.take,
+            't' : player.Player.take,
+            'go' : player.Player.go
+        }
+        if cmd in commdict: 
+            
+        
+        '''
+        if cmd in commdict:
+          #  f = commdict[cmd]
+            self.PC.f(args) 
+             I don't know why this is changed --this is needed because multiple keys apply to the same command (ex: 'l' and 'look' both indicate the look function), and those strings will not make anything of an argument.
+        else:
+            print("Pardon me?")
+        '''
+        
+        
+        
+    # start the input loop:
+    #   1. get user input (command)
+    #   2. split into tokens
+    #   3. process the command
+    def start( self ):                  
+        
+        userinput=input('> ')
+        print(userinput)
+        
+        userinputlist=userinput.split()     
+        cmd=str(userinput[0])   
+        cmd=cmd.lower()
+        userarg=" ".join(userinputlist[1:])        
+        
+        self.process_cmd(cmd,userarg)    
+    
+if __name__=='__main__':
+    gamesession=Game()
+    gamesession.start()
+    #gamesession.print_rooms()
+    
+    '''
+    while mother=sick:
+        g.start()
+    
+    print("You win!")
+    '''
+
+   
+    

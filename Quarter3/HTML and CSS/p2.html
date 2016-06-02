@@ -1,0 +1,155 @@
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+</head>
+<style>
+  body {
+    background: #17295a;
+    background-image:  url(bluegradient.png),url(https://c2.staticflickr.com/4/3810/9657121103_d1a0b56b60_c.jpg);
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+    background-position: bottom, bottom;
+    background-size: 100%, 100%;
+    /* https://www.google.com/fonts# */
+    font-family: "Book Antiqua", Palatino, serif;
+    font-weight: lighter;
+    color: #E8ECED;
+  }
+  
+  
+  h1 {
+    color: #175f7a;
+    text-shadow: -1px 0 #aaeeff, 0 1px #aaeeff, 1px 0 #aaeeff, 0 -1px #aaeeff;
+    font-family: 'Dancing Script', cursive;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    font-size: 50;
+    margin: 20px 50px 10px 50px;
+  }
+
+  a:link{
+    text-decoration: none;
+    color: #175f7a;
+  }
+
+  a:visited{
+    text-decoration: none;
+    color: #175f7a;
+  }
+    
+  a:hover{
+    text-decoration: none;
+    color: #1D7291;
+    text-shadow: -1px 0 #aaeeff, 0 1.5px #aaeeff, 1px 0 #aaeeff, 0 -1px #aaeeff;
+  }
+  
+  a:active{
+    text-decoration: none;
+    color: #1D7291;
+    text-shadow: -1px 0 #72C0D4, 0 1.5px #72C0D4, 1px 0 #72C0D4, 0 -1px #72C0D4;
+  }
+  
+  ol {
+    margin-right: 10%;
+  }
+
+  ul {
+    margin-top: -20px;
+    margin-left: -20px;
+  }
+
+  b {
+    color: white;
+    font-weight: bolder;
+    text-shadow: -1px 0 white;
+  }
+  .smoked {
+    background: rgba(0,0,0,0.3);
+    margin: 3%;
+    padding: 2%;
+    border: 1px dashed #90C3D4;
+    outline: 5px solid rgba(0,0,0,0.3);
+  }  
+
+  #head {
+    width: 100%;
+    margin: -8px;
+    padding-bottom: 20px;
+    border-bottom: dashed;
+    border-bottom-width: 1px;
+    border-bottom-color:  #90C3D4;
+    outline: 5px solid #175f7a;
+    position: fixed;
+    z-index: 10;
+    background-color: #175f7a;
+    color: #85B8C9;
+  }
+
+  .trans {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+  }
+
+  :hover.trans {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+  
+  
+  #img1 {
+    margin-left: 0px;
+    outline: .3em solid rgba(255,255,255,1);
+    width:75%;
+    max-width: 550px
+  }
+
+</style>
+<body>
+  <!--  put all HTML elements here -->
+  <center>
+  
+  <div id=head>
+  <h1><a href='https://docs.google.com/document/d/12q6Owd6riIub_PSDJhvkDNydXd-kj5OzyFK3e_zMKGI/edit' target="_blank">CSS<br>Styles and Page Structure</a></h1>
+  Rebekah Arruda
+  </div>
+  <br><br><br><br><br><br><br><br><br><br>
+  </center>
+  <div class="smoked">
+    <center><font size='4'>Styles</font></center>
+    <ol>
+      <li> CSS stands for <b>c</b>ascading <b>s</b>tyle <b>s</b>heets. It is used to style a webpage and add functionality.</li>
+      <li><ul>
+        <li>external CSS is in a separate file</li>
+        <li>internal CSS is in < style > tags in the < head >. It overrides external CSS.</li>
+        <li>inline CSS is used by using the < style > attribute and it will override both other forms of CSS.</li>
+      </ul></li>
+      <li>Class is used to style a group of elements all in the same way, for instance, while id is used for one particular element.</li>
+      <li>You will find examples of these in the code.</li>
+      <li>Likewise with this question about color.</li>
+      <li>The background of the page has plenty examples of different properties.</li>
+      <li>The header utilizes several property/value pairs.</li>
+      <li>The em unit is relative to the current font size, while px refers to pixels which is an absolute length. Pixels do, however, very from divice to device in regards to how many pixels are actually used. </li>
+      <li>Four hyperlink states: link (unvisited link), visited, hover, active (the moment a link is clicked) These are customized by:<br><font size='2' face='courier new'>a:[name of state] {<br>/*tab*/[customization]<br>}</font></li>
+    </ol>
+  </div>
+  <div class='smoked'>
+    <center><font size='4'>Page Structure</font>
+    <br><br>
+    <img class="trans" id="img1" src="http://www.w3schools.com/css/box-model.gif" alt="This clearly didn't work. :<"  />
+    </center>
+    <br>
+    <ol>
+      <li>The box model describes how CSS elements and content are formatted. Text and images are the content. Then there is a clear area around content that is the padding. A border goes around the padding and then there is a clear margin that is outside of the border.</li>
+      <li>There are borders and outlines on the top fixed heading bar and both text boxes here in the body.</li>
+      <li>There are also margins specified using both shorthand and long form.</li>
+      <li>Pixels are absolute forms of measurement, meaning they are displayed at the same size across all devices. Relative dimensions on the other hand change in relation to the viewing window.</li>
+      <li>By default, a fixed size div does not have its overflow clipped. It is visible outside of the element's box. The overflow property allows one to change it so that the content is clipped or that it is clipped with the addition of a scroll bar.</li>
+      <li>I actually see no reason why one should ever use absolute dimensions if they are aiming to have a nice looking webpage. Aesthetics and general visibility of content is improved by relative dimensions.</li>
+      <li>Block and inline formatting can be specified under the 'display' attribute. Block elements start on a neine and take up the full width available, while inline elements do not start on a new line and only take up the amount of space required to display the content. </li>
+      <li>Float allows text to wrap around images, and clear specifies which sides of an element are not allowed to float.</li>
+      <li>Floated elements that exceed the width of their container are not visible.</li>
+      <li>The width of the element is specified, and then putting 'auto' as the value for the property 'margin' evenly splits the remaining space between the element and the visible space.</li>
+    </ol>
+  </div>
+</body>
+</html>

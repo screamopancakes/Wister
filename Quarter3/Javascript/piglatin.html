@@ -1,0 +1,52 @@
+<div class='box'>
+    <input type='text' id='engtxt' class='inter' placeholder='Enter English text.' onkeyup='callf(subeng)'></textarea>
+    <br>
+    <button id='subeng'>translate</button>
+    <!-- <button id='pv' onclick='pvon()'>preview as you type</button> -->
+    <div id='plres' class='inter'></div>
+</div>
+<style>
+    #engtxt {   
+        width: 500px;
+    }
+    #plres {
+        display: none;   
+        width: 500px;
+    }
+</style>
+<script type="text/javascript">
+
+document.getElementById('subeng').onclick = function() {
+    document.getElementById('plres').innerHTML = pigLatin(document.getElementById("engtxt").value);
+    dispimmer('plres')  
+}
+var eng = document.getElementById('engtxt')
+eng.onkeyup=function(event){
+    if (event.keyCode == 13){
+        event.preventDefault()
+        document.getElementById('subeng').click()
+    }    
+}
+
+
+/*
+var previewon = false
+function pvon(){
+    if (previewon == false){
+       previewon = true
+       console.log('true')
+    } else{
+       previewon = false
+       console.log('false')
+    }
+}
+
+while (previewon == true){
+    var subeng = document.getElementById('subeng')
+    eng.onkeyup=function(event){
+        document.getElementById('subeng').click()
+    }
+}
+*/
+
+</script>

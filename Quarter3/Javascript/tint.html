@@ -1,0 +1,81 @@
+<div><img id='catImg' src="ugly_cat.gif"/><img id='bowtieImg' src='ugly_bow.gif'/></div>
+<div class='box' id='opsntogs'>
+<input type='radio' name='imgtogs' onclick='insertToggles("catImg")'> Cat
+<input type='radio' name='imgtogs' onclick='insertToggles("bowtieImg")'> Bowtie
+<br>
+
+</div>
+<style>
+#catImg {
+    position: absolute;
+}
+
+#bowtieImg {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+</style>
+<script>
+var imgs = document.body.getElementsByTagName('img'),
+    imagesWithToggles = []
+/*ORDER OF IMAGES*/
+for (var i=1;i<imgs.length;i++){
+    // order of attributes: id, opacity (0 or 1), hue-rotate, saturate, brightness, contrast
+    var imgx = [imgs[i].id,'0','0','100','100','100']
+    imagesWithToggles.push(imgx)
+    console.log(imgs[i].id)
+}
+
+// value needs to change back to the current value when toggling between bowtie and cat-- it resets every time to the defaults below
+function insertToggles(id){
+  if (document.getElementById('togbox')){
+    $('#togbox').remove()
+  }
+  var togbox = document.createElement('div'),
+      opsntogs = document.getElementById('opsntogs'),
+      togtext = "<input id='hue-rotate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='360' step='15' value='***'>Hue<br><input id='saturate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='200' step='10' value='***'>Saturation<br><input id='brightness Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Brightness<br><input id='contrast Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Contrast<br><input id='opacity Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"100\"step=\"1\" value=\"***\">Opacity<br>"
+  // +++ id   *** value
+  var idstr = '#'+id
+      
+  console.log($(idstr).css('-webkit-filter'))
+  var allRanges=$('[type=range]'),
+      filarr=[]
+  for (var i=0;i<allRanges.length;i++){
+    filarr.push([allRanges[i].id.split(' ')[0]])
+  }
+  var sliidarr = ['hue-rotate Slider','saturate Slider','brightness Slider','contrast Slider',]
+  console.log(filarr)
+  togbox.id = 'togbox'
+  togbox.innerHTML = togtext
+  opsntogs.appendChild(togbox)
+  
+  for (var x=0;x<5;x++){
+    var slider=document.getElementById(sliidarr[x])
+    togtext = togtext.replace('+++',id)
+    slider.value = filarr[x]
+    console.log(filarr[x])
+  }
+  
+}
+// 
+
+function setFilters(id){
+  var idstr = '#'+id
+  console.log($(idstr).css('-webkit-filter'))
+  var filters=[]
+  var allRanges=$('[type=range]');
+  for (var i=0;i<allRanges.length;i++){
+    filters.push([allRanges[i].id.split(' ')[0],allRanges[i].value])
+  }
+  var string = "-webkit-filter:"
+  for(var i=0;i<filters.length;i++){
+    if(filters[i][0]=='hue-rotate')
+      string+=filters[i][0]+"("+filters[i][1]+"deg) "
+    else
+      string+=filters[i][0]+"("+filters[i][1]+"%) "
+  }
+  document.getElementById(id).setAttribute("style",string)
+}
+</script>

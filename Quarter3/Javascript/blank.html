@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="http://3.bp.blogspot.com/-PTty3CfTGnA/TpZOEjTQ_WI/AAAAAAAAAeo/KeKt_D5X2xo/s1600/js.jpg" type="img/jpg"/>
+    <link rel="stylesheet" type="text/css" href="CSS_files/rad.css">
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+    <script src="functions.js"></script>
+    <title>P2 | js games | A&C</title>
+    <script src="https://code.jquery.com/jquery-1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var content=document.getElementById('content')
+        
+        var hash=window.location.href.split('#')[1]
+          $('#content').load(hash+'.html')
+          content.className=hash
+        
+        $("#html_dom").click(function(){
+          if(location.hash!='#html_dom')
+            $('#content').load('html_dom.html');
+        });
+        
+        $("#register").click(function(){
+          if(location.hash!='#Register')
+           $('#content').load('register.html');
+        });
+        
+        $("#login").click(function(){
+          if(location.hash!='#login')
+            $('#content').load('login.html');
+        });
+        
+        $("#madlibs").click(function(){
+          if(location.hash!='#madlibs')
+            $('#content').load('madlibs.html');
+        });
+        
+        $("#piglatin").click(function(){
+          if(location.hash!='#piglatin')
+            $('#content').load('piglatin.html');
+        });
+        
+        $("#carBuilder").click(function(){
+          if(location.hash!='#carBuilder')
+            $('#content').load('carBuilder.html');
+        });
+        
+         $("#tint").click(function(){
+           if(location.hash!='#tint')
+            $('#content').load('tint.html');
+        });
+        
+        $("#coloringBook").click(function(){
+          if(location.hash!='#coloringBook')
+            $('#content').load('coloringBook.html');
+        });
+        $("#GamesPage").click(function(){
+          if(location.hash!='#GamesPage')
+           $('#content').load('GamesPage.html');
+        });
+        
+        $("#ChatRoom").click(function(){
+          if(location.hash!='#ChatRoom')
+            $('#content').load('ChatRoom.html');
+        });
+        
+          window.onhashchange=updatePage
+          pageLoadFuncs()
+          getAllComments()
+      });
+  </script>
+</head>
+<body>
+  <div id="head">
+    <select class='inter' onchange="ctheme(this.value)">
+      <option value='rad'>Radar Green</option>
+      <option value='cer'>Cerulean Night</option>
+      <option value='cre'>Creamsicle</option>
+      <option value='BlueGreen'>Blurgle</option>
+    </select>
+    <img id='av' src='https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'/>
+    <div id='prof'><h3 id='n'><a id='login' href='#login'>Login</a>/<a id='register' href='#register'>Register</a></h3></div>
+    <a><h1>JS Games & Pages</h1></a>
+    <nav>
+      <a id='html_dom' href='#html_dom'>HTML DOM</a>
+      <a id='madlibs' href='#madlibs'>Mad Lib</a>
+      <a id='piglatin' href='#piglatin'>Pig Latin</a>
+      <a id='carBuilder' href='#carBuilder'>Car Builder</a>
+      <a id='tint' href='#tint'>Tint</a>
+      <a id='coloringBook' href='#coloringBook'>Coloring Book</a>
+      <a id='GamesPage' href='#GamesPage'>Games</a>
+      <a id='ChatRoom' href='#ChatRoom'>Chat Room</a>
+    </nav>
+  </div>
+  <br><br><br><br><br><br><br>
+  <div id='content'>
+  </div>
+  <div id='footer'>
+  </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+var socket=io.connect();
+if (getCookie('name')!==undefined){
+  ctheme(getCookie('theme'))
+  lin(String(getCookie('name')),String(getCookie('pass')))
+  socket.emit('cookies',document.cookie)
+}
+//sockets
+function siteAlert(msg){
+  if(getCookie('admin')=='flarf')
+  socket.emit('alert',msg)
+}
+socket.on('alert',function(stuff,mood){
+  albox(stuff,mood)
+})
+
+</script>
+</html>

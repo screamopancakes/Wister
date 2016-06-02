@@ -1,0 +1,614 @@
+<html>
+<head>
+  <link rel="icon" href="FBicon.gif" type="image/gif"/>
+  <title>Fakebook</title>
+</head>
+<style>
+  
+  body {
+    background: #E9EAED;
+    font-family: Helvetica, sans;
+    font-size: 9pt;
+    color: #3B3D4B;
+    margin: 0 0;
+  }
+
+  #topbar {
+    background-image: url("FBheadbg.png");
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid #103480;
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+    height: 42px;
+    width: 100%;
+    z-index: 20;
+  }
+
+  #center {
+    margin-top: 0px;
+    margin: 0 auto;
+    width: 980px;
+    position: relative;
+  }
+
+  #container {
+    max-width: 980px;
+    width: 85%;
+    min-width: 642px;
+    margin: 0 auto;
+    height: 42px;
+    z-index: 25;
+    color: #F1FFFF;
+    text-shadow: 0 .1px white, .1px -1px #24324F, -.1px 0 #4662D5, 0px 0 white, .2px 0 #C1869E;
+    font-size: 10pt;
+    position: relative;
+  }
+  
+  @media (max-width: 960px) {
+    #container {
+      width: 100%;
+      min-width: 642px;
+    }
+  }
+  
+  .bgdrkn {
+    display: inline-block;
+    padding: 2px;
+    border-radius: 2px;
+    margin: 0 0;
+    cursor: pointer;
+  }
+  
+  .bgdrkn:hover {
+    background: rgba(0,0,0,0.1);
+  }
+ 
+  .bgdrkn2 {
+    display: inline-block;
+    padding: 2px;
+    border-radius: 2px;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  .bgdrkn2:hover {
+    background: rgba(0,0,0,0.07);
+  }
+  
+  .icndrkn {
+    display: inline-block;
+    margin: 0px 6px 10px 6px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .icndrkn:hover {
+    -webkit-filter: brightness(0.70);
+    filter: brightness(0.70);
+  }
+  
+  .vd {
+    display: inline-block;
+    height: 18px;
+    width: 1px;
+    background: rgba(0,0,0,0.1);
+    position: absolute;
+    margin: 11px;
+  }
+  
+  #vd1 {
+     margin-left: 98px
+  }
+  
+  #vd2 {
+    margin-left: 151px;
+  }
+  
+  #vd3 {
+    margin-left: 407px;
+  }
+  
+  .blueol {
+    border: 1px solid #23355B;
+  }
+  
+  #fblogo {
+    margin-left: 5px;
+    margin-top: 7px;
+    position: absolute;
+  }
+  
+  form {
+    display: inline-block;
+    margin-left: 38px;
+    margin-top: 7px;
+    min-width: 142px;
+    width: 45.4%;
+    max-width: 446px;
+    height: 24px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    padding: 0;
+    position: relative;
+  }
+  
+  @media (max-width: 950px){
+    form {
+      width: 40%;
+    }
+  }
+
+  @media (max-width: 800px){
+    form {
+      width: 36%;
+    }
+  }
+  
+  @media (max-width: 750px){
+    form {
+      width: 27%;
+    }
+  }
+  
+  @media (max-width: 650px){
+    form {
+      width: 20%;
+    }
+  }
+
+  #search {
+    background: white;
+    font-size: 10pt;
+    font-family: Helvetica, sans;
+    border: none;
+    height: 24px;
+    width: 100%;
+    display: inline-block;
+    padding-left: 8px;
+    position: absolute;
+    border-radius: 4px;
+  }
+  
+  #sbutton {
+    height: 24px;
+    width: 46px;
+    display: inline-block;
+    border: none;
+    background-color: #F6F7F8;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  
+  #search:focus {
+    color: rgb(189,193,201);
+    outline: none;
+  }
+  
+  #search:focus + #sbutton {
+    background: rgb(88,144,255);
+  }
+  
+  #search:focus + #sbutton > #mglass {
+    -webkit-filter: brightness(1000%);
+    filter: brightness(1000%);
+  }
+  
+  #user {
+    position: absolute;
+    margin-top: 6px;
+    width: 82px;
+    height: 24px;
+    padding: 4px 8px 2px;
+  }
+  
+  #av {
+    position: relative;
+    margin-right: 6px;
+    width: 19px;
+    height: 19px;
+    border-radius: 1px;
+  }
+  
+  #utext {
+    position: absolute;
+    margin-top: 3px;
+  }
+  
+  #home {
+    display: inline-block;
+    position: absolute;
+    width: 36px;
+    height: 24px;
+    padding: 7px 8px 0px 8px;
+    margin: 6px 99px ;
+  }
+  
+  #ff {
+    display: inline-block;
+    position: absolute;
+    width: 77px;
+    height: 25px;
+    padding: 7px 8px 0px 8px;
+    margin: 6px 152px;
+  }
+  
+  #hicon {
+    display: inline-block;
+    position: absolute;
+    margin-top: 12px;
+    right: 0;
+    margin-right: 70px;
+  }
+  
+  #hicon2 {
+    display: inline-block;
+    position: absolute;
+    margin-top: 16px;
+    right: 0px;
+    margin-right: 10px;
+    position: absolute;
+  }
+  
+  
+  @media (max-width: 960px) {
+    #left {
+      margin-left: 0;
+    }
+  }
+  
+  #leftcol {
+    width: 180px;
+    margin-left: 3px;
+    background-image: url(icons.gif);
+    background-repeat: no-repeat;
+    background-position: 5px 4px;
+    float: left;
+  }
+  
+  h1 {
+    font-size: 8pt;
+    color: #666666;
+    padding-left: 2px;
+    margin-top: 12.5px;
+    margin-bottom: 0px;
+  }
+
+  .leftxt {
+    display: inline-block;
+    padding-left: 25px;
+    padding-top: 4px;
+    width: 139px;
+    height: 17px;
+    z-index: 1;
+  }
+  
+  .gearico {
+    height: 12px;
+    margin-top: -13px;
+    margin-left: 120;
+    -webkit-filter: brightness(120%);
+    filter: brightness(120%);
+    display: none;
+  }
+  
+  .leftxt:hover > .gearico {
+    display: block;
+  }
+  
+  /* Unfortunate, there's no parent selector. */
+  
+  #mid {
+    display: block;
+    width: 490;
+    margin-top: 55;
+    margin-left: 185px;
+  }
+  
+  .mid {
+    width: 466px;
+    background: white;
+    border: 1px solid rgb(223,224,228);
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin-bottom: 0px;
+    position: relative;
+    font-size: 11pt;
+    line-height: 140%;
+    padding: 12px;
+  }
+  
+  #upload {
+    height: 149px;
+    margin-bottom: 10px;
+  }
+  
+  #tupload {
+    height: 25px;
+    width: 466px;
+    border-bottom: 1px solid rgb(223,224,228);
+    margin: 0 auto;
+    font-size: 10pt;
+    font-weight: 700;
+    color: rgb(59,89,152)
+  }
+  
+  #us {
+    display: inline-block;
+    color: #06242E;
+  }
+  
+  .op {
+    height: 39px;
+    width: 490px;
+    color: #aaaaaa;
+    font-size: 10pt;
+    margin-bottom: 12px;
+  }
+  
+  .opav {
+    float: left;
+    height: 36px;
+    width: 36px;
+    margin-right: 10px;
+  }
+  
+  h2 {
+    display: inline;
+    font-size: 10pt;
+    font-weight: 700;
+    color: rgb(59,89,152);
+  }
+  
+  .like {
+    height: 25px;
+    width: 466px;
+    border-top: 1px solid rgb(223,224,228);
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    color: #888888;
+    padding-top: 6px;
+    font-weight: bold;
+    font-size: 10pt;
+  }
+  
+  #like {
+    margin-left: 0px;
+  }
+  
+  .likeico {
+    height: 14px;
+    margin-right: 7px;
+    margin-left: 25px;
+    -webkit-filter: contrast(50%);
+    filter: contrast(50%);
+    opacity: 0.6;
+  }
+  
+  .txtu:hover {
+    text-decoration: underline;
+    cursor: pointer; 
+  }
+
+  .comment {
+    background: rgb(246,247,248);
+    width: 490px;
+    border: 1px solid rgb(223,224,228);
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    margin-top: -1px;
+    margin-bottom: 10px;
+    
+  }
+  
+  .liked {
+    height: 38px;
+    width: 466px;
+    border-bottom: 1px solid rgb(223,224,228);
+    margin: 0 auto;
+  }
+  
+  #p1 {
+    height: 250;
+  }
+  
+  #c1 {
+    height: 150;
+  }
+  
+  #p2 {
+    height: 600;
+  }
+  
+  #c2 {
+    height: 300;
+  }
+
+  
+  #right {
+    width: 280px;
+    height: 500px;
+    float: right;
+    margin-right: 12px;
+    background: white;
+    border: 1px solid rgb(223,224,228);
+    border-radius: 3px;
+  }
+  
+  #chat {
+    bottom: -5px;
+    right: 0;
+    margin-right: 16px;
+    width: 258px;
+    height: 10px;
+    position: fixed;
+    background-image: url(chatbg.png);
+    background-size: 100%;
+    border-radius: 4px;
+    color: rgb(112,112,113);
+    font-weight: bold;
+    border-width: 1px 1px 0px 1px;
+    border-color: rgba(0,0,0,.2);
+    border-style: solid;
+    padding-bottom: 23px;
+    padding-left: 16px;
+  }
+  
+  #chat:hover {
+    margin-right: 14px;
+    width: 262px;
+    background-image: url(chatbgh.png);
+  }
+  
+  #gdot {
+    display: inline-block;
+    height: 10;
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 7px;
+  }
+  
+  #writeico {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    height: 12px;
+    margin-top: 7px;
+    margin-right: 35px;
+    -webkit-filter: brightness(140%);
+    filter: brightness(140%);
+  }
+  
+  #chatgearico {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    height: 12px;
+    margin-top: 7px;
+    margin-right: 15px;
+    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+  }
+  
+  
+  
+</style>
+
+<body>
+  <div id="topbar">
+    <div id="container">
+      <img id="fblogo" class="bgdrkn" src="FBwhite.gif"/>
+      <form class="blueol">
+        <input type="text" id="search" placeholder="Search Facebook">
+        <button type="submit" id="sbutton">
+          <img src="https://pixabay.com/static/uploads/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png" id="mglass" height=80%/>
+        </button>
+      </form>
+      <div id="user" class="bgdrkn">
+        <img id="av" class="blueol" src="FBavatar.jpg"/><span id="utext">Rebekah</span>
+      </div>
+      <div class="vd" id="vd1"></div>
+      <div id="home" class="bgdrkn">Home</div>
+      <div class="vd" id="vd2"></div>
+      <div id="ff" class="bgdrkn">Find Friends</div>
+      <div id=hicon>
+        <img id="frreq" class="icndrkn" src="FBfrreq.gif" title="Friend Requests"/>
+        <img id="msg" class="icndrkn" src="FBmsg.gif" title="Messages"/>
+        <img id="not" class="icndrkn" src="FBnot.gif" alt="Notifications"/>
+      </div>
+      <div class="vd" id="vd3"></div>
+      <div id="hicon2">
+        <img id="priv" class="icndrkn" src="FBpriv.gif" alt="Privacy Shortcuts"/>
+        <img id="tri" class="icndrkn" src="FBtri.gif"/>
+      </div>
+    </div>
+  </div>
+  <div id="center">
+    <div id="left">
+      <div id="leftcol">
+        <div class="bgdrkn2 leftxt">Rebekah QA</div>
+        <div class="bgdrkn2 leftxt">Edit Profile</div>
+        <h1>FAVORITES</h1>
+        <div class="bgdrkn2 leftxt">News Feed <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Messages <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Events <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Sale Groups <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <h1>GROUPS</h1>
+        <div class="bgdrkn2 leftxt">STA Class of 2013 <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">LGBTQIAP+ Teen... <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">St Thomas Aquina... <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Change Pinkerton'... <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Legner's Hallowee... <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">New Groups</div>
+        <div class="bgdrkn2 leftxt">Create Group</div>
+        <h1>APPS</h1>
+        <div class="bgdrkn2 leftxt">Games <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">On This Day <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Suggest Edits<img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Pokes<img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Saved <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Photos <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Find Friends <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Games Feed <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <h1>FRIENDS</h1>
+        <div class="bgdrkn2 leftxt">Close Friends <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Family <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Acquaintances <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <h1>INTERESTS</h1>
+        <div class="bgdrkn2 leftxt">Pages and Public... <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <h1>PAGES</h1>
+        <div class="bgdrkn2 leftxt">Pages Feed <img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" class="gearico"/></div>
+        <div class="bgdrkn2 leftxt">Like Pages</div>
+        <div class="bgdrkn2 leftxt">Create Page</div>
+        <h1>EVENTS</h1>
+        <div class="bgdrkn2 leftxt">Create Event</div>
+      </div>
+    </div>
+    <div id="right">
+      
+      
+    </div>
+    <div id="mid">
+      <div id="upload" class='mid'>
+        <div id="tupload">
+          <div id="us">Update Status</div>
+          <div class="vd"></div>
+          <div class="bgdrkn3">Add Photos/Video</div>
+          <div class="vd"></div>
+          <div class="bgdrkn3">Create Photo Album</div>
+        </div>
+        <button id="friends"></button>
+        <button id="post"></button>
+      </div>  
+      
+    
+    <div id="p1" class="mid">
+        <div class="op">
+          <img class="opav" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS-3YbIM4RKd5FUCT4jXucpSlaccyKq9FIhlKqXiS1tdtP53sjD"/>
+          <h2 class="txtu">Felicia Dion</h2><br>March 9 at 4:54pm
+        </div>
+        So proud of how far I've come with my self confidence. Only a few years ago I would cry because all of the girls on basketball teams with me were so skinny and popular and I wasn't. I was average size and had a few close friends, just like today. Only now, I am able to go on a run without feeling like I have to hide my body because I am ugly. I am not ugly, and no one should be judged for their appearance. Just accept and be happy with yourself because you can't be anyone else, nor should you want to be.
+        <div class="like">
+          <span class="txtu"><img id="like" class="likeico" src="http://static.newbeauty.com/doctor_finder/images/grey_thumb_up.png">Like</span>
+          <span class="txtu"><img class="likeico" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Message-icon-grey.png/648px-Message-icon-grey.png">Comment</span>
+          <span class="txtu"><img class="likeico" src="https://d12khewri0k3e.cloudfront.net/sites/all/images/arrow-back.png">Share</span>
+        </div>
+      </div>
+      <div id="c1" class="comment">
+          <div class="liked"></div>
+      </div>
+
+    </div>
+  </div>
+  <div id="chat">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Ski_trail_rating_symbol-green_circle.svg/600px-Ski_trail_rating_symbol-green_circle.svg.png" id="gdot"/>Chat (10)<img id="writeico" src="https://cdn3.iconfinder.com/data/icons/compass-1/512/edit-512.png"/><img src="https://cdn3.iconfinder.com/data/icons/fez/512/FEZ-04-128.png" id="chatgearico"/>
+  </div>
+    
+  </div>
+</body>
+</html>

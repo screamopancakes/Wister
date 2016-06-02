@@ -1,0 +1,39 @@
+<div class='box' id='ins'>
+    <table class='plainTable rightAlignData'>
+        <tr><td>Furniture:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>School Supply:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Animal:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Verb (past tense):</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Number</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Animal (plural):</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Verb (past tense):</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Bird:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Noun:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Verb (past tense):</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Adjective:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Adverb:</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Adjective</td><td><input class='inter mlin'></td></tr>
+        <tr><td>Adverb</td><td><input class='inter mlin'></td></tr>
+    </table>
+<button id='sub' onclick='mlfillin()'>submit</button>
+</div>
+<br>
+<div class='box' id='fiml'>
+</div>
+<style>
+    #fiml {
+        display: none;
+        max-width: 400px;
+    }
+</style>
+<script type="text/javascript">
+var mls = document.getElementsByClassName('mlin')
+for (var x = 0; x < mls.length; x++){
+    var i = mls[x]
+    i.onkeyup=function(event){
+        if (event.keyCode == 13){
+            document.getElementById('sub').click()
+        }    
+    }
+}
+</script>

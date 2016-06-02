@@ -1,0 +1,51 @@
+
+<div class="box">
+<h2>Forgot Your Password?</h2>
+
+</div>
+<br><br>
+<div class="box" id='reg'>
+<h2>Register</h2>
+<form>
+  <table class='plainTable'>
+    <tr>
+      <td>Name:</td>
+      <td><input id="u" class='inter' maxlength='20'/></td>
+    </tr>
+    <tr>
+      <td>Password:</td>
+      <td><input id="p" class='inter' type="password"/></td>
+    </tr>
+    <tr><td>Confirm Password:</td><td><input id="cp" class='inter' type="password"/></td></tr>
+  <tr> 
+  <td>Gender:</td>
+  <td>
+  <input type="radio" name="gender" value="Other/Unspecified" checked> Other/Unspecified
+  <br>
+  <input type="radio" name="gender" value="Female"> Female
+  <br>
+  <input type="radio" name="gender" value="Male"> Male
+  </td>
+  </tr>
+  </table>
+</form>
+<button id='cbutton' onclick="create()">create</button>
+</div>
+<style type="text/css">
+#alert {
+  background: black;
+  color: white;
+  width: 100%;
+}
+</style>
+<script type="text/javascript">
+var ins = document.getElementsByTagName('input')
+for (var x = 0; x < ins.length; x++){
+  var i = ins[x]
+  i.onkeyup=function(event){
+      if (event.keyCode == 13){
+          document.getElementById('cbutton').click()
+      }    
+  }
+}
+</script>

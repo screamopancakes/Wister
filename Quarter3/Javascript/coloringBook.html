@@ -1,0 +1,273 @@
+<style>
+#pBasics {
+  float: left;
+  width: 210px;
+  height: 400px;
+  margin-left:5px;
+}
+#pMain {
+  margin-top:-15px;
+  margin-left: 255px;
+  width: 70%;
+}
+  .box>img{
+    display:none;
+  }
+  th,td{
+    text-align:center;
+  }
+</style>
+  <div id='pBasics' class='box'>
+    <!--<img id="fox" src="fox.jpg" name='coloringBook'alt="The Scream">
+    <img id="mlp" src="mlp.jpg" name='coloringBook'>
+    <img id="scream" src="darth-vader.png" name='coloringBook' alt="The Scream">-->
+    <img id="colors" src="colors.png" width="220" height="277">
+      <table text-align='center'>
+        <tr><th>Tools</th></tr>
+        <tr><td>Tolerance Slider<input type="range" id='toleranceSlider' min='0' max='255' value='30'></td></tr>
+        <tr><td>color Picker <canvas id='colorPicker' width='200' height='60' onmousedown='getMouseForColorPicker(event)'></canvas></td></tr>
+        <tr><td><input type='button' value='Next Page' onclick='drawColoringPicture(curpage)'></td></tr>
+        <tr><td>Size Slider<input type="range" id='size' min='1' max='100' value='30'></td></tr>
+        <tr><td></td></tr>
+        <tr><td><input type='button' value='Fun Line' onclick='funLine()'><input type='button' value='Fill' onclick=setFill()><input type='button' value='Draw' onclick='draw()'></td></tr>
+        <tr><td><input type='button' value='Clear' onclick='ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)'></td></tr>
+    </table>
+  </div>
+  <br>
+  <div id='pMain' class='box'>
+    <canvas id="myCanvas" height='750px' width='1150px' style="border:1px solid #d3d3d3; background:white;" onmousedown='getCursorPosition(event)' onkeydown='keyParse(event)'>
+    Your browser does not support the HTML5 canvas tag.</canvas><!-- yeah fix height-->
+  </div>
+  <script src='functions.js'></script>
+<script>
+//getAllComments();
+//for drawing and stuff change the onclick to draw/fill/etc
+//fix tolerance error if put to 255 and other stuff
+// eraser,more coloring tools, square,circle etc.
+  var timer=0
+  var curpage=0
+  var old
+  var c2=document.getElementById('colorPicker');
+  var context=c2.getContext('2d');
+  var c=document.getElementById('myCanvas')
+  c.tabIndex = 1000
+  c.style.outline = "none"
+  var ctx = c.getContext("2d");
+  var colors=document.getElementById('colors')
+  var color='#FFFFFF'
+  colors.onload = function(){
+    context.drawImage(document.getElementById("colors"),0,0,180,60)
+  }
+  var pages=document.getElementsByName('coloringBook')
+  function drawColoringPicture(num){
+    console.log(curpage)
+    if (curpage<pages.length-1){
+      curpage+=1
+    } else {
+      curpage=0
+    }
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    ctx.drawImage(pages[num],0,0,750,750)
+  }
+  
+  function funLine(){
+    var rect = c.getBoundingClientRect();
+    ctx.lineWidth = 1;
+    ctx.lineJoin = ctx.lineCap = 'round';
+    var isDrawing, points = [ ];
+    
+    c.onmousedown = function(e) {
+      rect = c.getBoundingClientRect()
+      console.log(hexToRgb(color))
+      var color1=hexToRgb(color)
+      ctx.strokeStyle = String('rgba('+color1[0]+','+color1[1]+','+color1[2]+',0.3)');
+      points = [ ];
+      isDrawing = true;
+      points.push({ x: e.clientX- rect.left, y: e.clientY- rect.top });
+    };
+    
+    c.onmousemove = function(e) {
+      if (!isDrawing) return;
+    
+      //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      points.push({ x: e.clientX- rect.left, y: e.clientY- rect.top });
+    
+      ctx.beginPath();
+      ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
+      ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+      ctx.stroke();
+      
+      for (var i = 0, len = points.length; i < len; i++) {
+        var dx = points[i].x - points[points.length-1].x;
+        var dy = points[i].y - points[points.length-1].y;
+        var d = dx * dx + dy * dy;
+    
+        if (d < 1000) {
+          ctx.beginPath();
+          var color1=hexToRgb(color)
+          ctx.strokeStyle = String('rgba('+color1[0]+','+color1[1]+','+color1[2]+',0.3)');
+          ctx.moveTo( points[points.length-1].x + (dx * 0.2), points[points.length-1].y + (dy * 0.2));
+          ctx.lineTo( points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
+          ctx.stroke();
+        }
+      }
+    };
+    
+    c.onmouseup = function() {
+      isDrawing = false;
+      points.length = 0;
+    };
+  }
+  
+  
+  function draw(){
+    //changes click to draw, and draws.
+    var isDrawing;
+    var rect = c.getBoundingClientRect();  //scrolling breaks things a little.
+    c.onmousedown = function(e) {
+      rect = c.getBoundingClientRect();
+      saveSpace()
+      ctx.lineWidth= document.getElementById('size').value
+      ctx.strokeStyle=color
+      isDrawing = true;
+      ctx.beginPath()
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    };
+    c.onmousemove = function(e) {
+      if (isDrawing) {
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+      }
+    };
+    c.onmouseup = function() {
+      ctx.closePath()
+      isDrawing = false;
+    };
+  }
+  
+  function setFill(){
+    //changes click to fill
+    c.setAttribute('onmousedown','getCursorPosition(event)')
+    c.setAttribute('onmousemove','')
+    c.setAttribute('onmouseup','')
+  }
+  
+  function getMouseForColorPicker(event){
+    //gets color from color picker.
+    console.time('test')
+    var rect = c2.getBoundingClientRect();  //scrolling breaks things a little.
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    var data = context.getImageData(x, y, 1, 1).data;
+    color=rgbToHex(data[0],data[1],data[2])
+    context.fillStyle=color
+    context.fillRect(181,0,20,60)
+  }
+  
+  function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+  
+  function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      result=[parseInt(result[1], 16),parseInt(result[2], 16),parseInt(result[3], 16),255]
+      return result 
+  }
+
+  function getCursorPosition(event) {
+    //gets cursor pos then runs fillSpace()
+    var rect = c.getBoundingClientRect();  //scrolling breaks things a little.
+    var x = Math.round(event.clientX - rect.left);
+    var y = Math.round(event.clientY - rect.top);
+    console.log("x: " + x + " y: " + y);
+    var data = ctx.getImageData(x, y, 1, 1).data;
+    var rgba = [data[0],data[1],data[2],data[3]]
+    var fillColor=hexToRgb(color)
+    fillSpace(x,y,rgba,fillColor)   //alpha is opacity/lightness
+  }
+  
+  function fillSpace(xCord,yCord,curColor,newColor){
+    //custom wrote this fill because images cant use fill()
+    saveSpace()
+    var tolerance=document.getElementById('toleranceSlider').value
+    if(curColor[0]==newColor[0] && curColor[1]==newColor[1] && curColor[2]==newColor[2]){
+      return null
+    }
+    var imgData = ctx.getImageData(0,0,c.width,c.height),
+    startR=curColor[0],
+    startG=curColor[1],
+    startB=curColor[2],
+    newImg=imgData
+    var pixelStack=[[xCord,yCord]]
+    while(pixelStack.length>0){
+      var newPos=pixelStack.pop(),
+      x=Math.round(newPos[0]),
+      y=Math.round(newPos[1]),
+      checkRight=false,
+      checkLeft=false
+      // maybe more efficient?
+      var pixelPos = (y*c.width + x ) * 4; //makes it go up a row!
+        while(y-- > 0 && matchStartColor(pixelPos)){
+          pixelPos -= c.width * 4;   //makes it go up a row!
+        }
+        
+        pixelPos += c.width * 4 // must go down a row again, otherwise it wont continue filling.
+        
+        while(y++ < c.height-1 && matchStartColor(pixelPos)){
+          colorPixel(pixelPos)
+          if(matchStartColor(pixelPos+4)){
+            if (!checkRight){
+              pixelStack.push([x+1,y])
+              checkRight=true
+            }
+          } else if(checkRight){
+              checkRight=false
+          }
+          
+          if(matchStartColor(pixelPos-4)){
+            if (!checkLeft){
+              pixelStack.push([x-1,y])
+              checkLeft=true
+            }
+          } else if(checkLeft){
+            checkLeft=false;
+          }
+          pixelPos += c.width * 4;   //makes it go down a row!          
+        }
+    }
+    
+    function matchStartColor(pixelPos)
+      {
+        var r = imgData.data[pixelPos];	
+        var g = imgData.data[pixelPos+1];	
+        var b = imgData.data[pixelPos+2];
+        return Math.abs(r - startR) <= tolerance
+        && Math.abs(g - startG) <= tolerance
+        && Math.abs(b - startB) <= tolerance
+      }
+
+    function colorPixel(pixelPos){
+      newImg.data[pixelPos]=newColor[0]
+      newImg.data[pixelPos+1]=newColor[1]
+      newImg.data[pixelPos+2]=newColor[2]
+      newImg.data[pixelPos+3]=newColor[3]
+    }
+    
+  ctx.putImageData(newImg,0,0)
+  console.timeEnd('test')
+  }
+  
+  function saveSpace(){
+    //used before changes for ctrlz maybe make into an array for more than one ctrl z? also, ctrl y!
+    old =ctx.getImageData(0,0,c.width,c.height)
+  }
+  
+  function keyParse(e){
+    //parse keypresses for things like ctrlZ
+    if (e.keyCode == 90 && e.ctrlKey){
+      ctx.putImageData(old,0,0)
+    };
+  }
+
+</script>
+

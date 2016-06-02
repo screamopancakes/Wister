@@ -1,0 +1,112 @@
+body {
+  background-image: url(redpattern.jpg);
+  background-size: 100px;
+  color: #5E3D38;
+  position: static;
+  font-family: Comfortaa, cursive;
+}
+
+h1 {
+  color: #FFC619;
+  margin-bottom: -3px;
+}
+
+#head {
+  background: #FAF7E1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  padding: 5px 0px 30px 20px;
+  border-bottom: 5px solid #E34519;
+  z-index: 50;
+}
+
+.box {
+  background: #F2D7A7;
+  background: rgba(250,247,225,0.8);
+  padding: 1px 0px 10px 10px;
+  margin: 10px 0px 20px 15%;
+  width: 80%;
+  position: relative;
+}
+
+a:link {
+  color: #E34519;
+  text-decoration: none;
+  margin: 10px;
+}
+
+#head > a:link {
+ color: #6E4922; 
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:visited {
+  color: #E34519;
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+select {
+  float: right;
+  margin-right: 30px;
+  margin-top: 30px;
+}
+
+.inter {
+  outline: none;
+  font-family: sans-serif;
+  background: #FAF7E1;
+  color: #6E4922;
+  border: 1px #6E4922 solid;
+  padding-left: 3px;
+}
+
+button {
+  font-family: sans-serif;
+  border: 1px #FFC619 solid;
+  background: #E34519;
+  color: #FAF7E1;
+  outline: none;
+  margin: 10px 0px;
+  border-radius: 2px;
+}
+
+button:active {
+  background: #FFC619;
+  color: #F0823E;
+}
+
+.redform {
+  border-color: #FF0000;
+}
+
+#av {
+  height: 50px;
+  width: 50px;
+  border: 1px #FFC619 solid;
+  float: right;
+  outline: none;
+  margin-top: 15px;
+  margin-right: 10px
+}
+
+#prof {
+  float: right;
+  width: 100px;
+  height: 50px;
+  margin-top: 15px;
+}
+
+#ins {
+  width: 370px;
+  padding-top: 30px;
+    }
