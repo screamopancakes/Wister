@@ -68,6 +68,7 @@ var gameArea = {
     },
     stop : function(){
         gameArea.pause()
+        console.log('stopped')
         this.context.font="30px Arial"
         this.context.fillStyle = '#A83B0C'
         this.context.fillText('g a m e   o v e r',50,200)
@@ -181,7 +182,7 @@ function player(x, y, radius){
           var a = Math.pow(Math.pow((point.x-lineStart.x),2)+Math.pow((point.y-lineStart.y),2),0.5),
               b = Math.pow(Math.pow((point.x-lineEnd.x),2)+Math.pow((point.y-lineEnd.y),2),0.5),
               c = Math.pow(Math.pow((lineStart.x-lineEnd.x),2)+Math.pow((lineStart.y-lineEnd.y),2),0.5),
-              angleC = Math.acos((a/(b*b+c*c-2*b*c)/(2*Math.PI)-Math.PI)),
+              angleC = Math.acos((a/(b*b+c*c-2*b*c)/(2*Math.PI))),
               height = Math.sin(angleC)*b
           return height
         }
