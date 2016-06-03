@@ -20,46 +20,51 @@
 <script>
 var imgs = document.body.getElementsByTagName('img'),
     imagesWithToggles = []
-/*ORDER OF IMAGES*/
+/*ORDER OF IMAGES: 
+-cat
+-bowtie
+*/
 for (var i=1;i<imgs.length;i++){
-    // order of attributes: id, opacity (0 or 1), hue-rotate, saturate, brightness, contrast
-    var imgx = [imgs[i].id,'0','0','100','100','100']
+    // order of attributes: id, opacity (0 or 100), hue-rotate, saturate, brightness, contrast
+    var imgx = [imgs[i].id,'100','0','100','100','100']
+    imgs[i].style.filter = 'opacity(100%) hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%)'
     imagesWithToggles.push(imgx)
-    console.log(imgs[i].id)
+}
+
+function getIndexOfImageToggles(id){
+  for (var a=0;a<imagesWithToggles.length;a++){
+    if (imagesWithToggles[a][0] == id)
+      return a
+  }
 }
 
 // value needs to change back to the current value when toggling between bowtie and cat-- it resets every time to the defaults below
+// why doesn't this work T-T
 function insertToggles(id){
   if (document.getElementById('togbox')){
     $('#togbox').remove()
   }
   var togbox = document.createElement('div'),
       opsntogs = document.getElementById('opsntogs'),
-      togtext = "<input id='hue-rotate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='360' step='15' value='***'>Hue<br><input id='saturate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='200' step='10' value='***'>Saturation<br><input id='brightness Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Brightness<br><input id='contrast Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Contrast<br><input id='opacity Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"100\"step=\"1\" value=\"***\">Opacity<br>"
+      togtext = "<input id='opacity Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='100' step='100' value='***'>Selected or not? Reword.<br><input id='hue-rotate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='360' step='15' value='***'>Hue<br><input id='saturate Slider' type=\"range\" onchange='setFilters(\"+++\")' min='0' max='200' step='10' value='***'>Saturation<br><input id='brightness Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Brightness<br><input id='contrast Slider' type=\"range\" onchange='setFilters(\"+++\")' min=\"0\" max=\"200\" value=\"***\">Contrast"
   // +++ id   *** value
-  var idstr = '#'+id
-      
-  console.log($(idstr).css('-webkit-filter'))
-  var allRanges=$('[type=range]'),
-      filarr=[]
-  for (var i=0;i<allRanges.length;i++){
-    filarr.push([allRanges[i].id.split(' ')[0]])
+  var idstr = '#'+id,
+      index = getIndexOfImageToggles(id)
+  console.log(imagesWithToggles[index])
+  for (var i=1;i<imagesWithToggles[index].length;i++){
+    togtext = togtext.replace('***',imagesWithToggles[index][i])
+    togtext = togtext.replace('+++',id)
   }
-  var sliidarr = ['hue-rotate Slider','saturate Slider','brightness Slider','contrast Slider',]
-  console.log(filarr)
   togbox.id = 'togbox'
+  console.log(togtext)
   togbox.innerHTML = togtext
   opsntogs.appendChild(togbox)
-  
-  for (var x=0;x<5;x++){
-    var slider=document.getElementById(sliidarr[x])
-    togtext = togtext.replace('+++',id)
-    slider.value = filarr[x]
-    console.log(filarr[x])
+  var allRanges=$('[type=range]')
+  for (var i=0;i<allRanges.length;i++){
+    allRanges[i].setAttribute('value', imagesWithToggles[i+1])
+    console.log('ranges values'+allRanges[i].value)
   }
-  
 }
-// 
 
 function setFilters(id){
   var idstr = '#'+id
@@ -69,12 +74,17 @@ function setFilters(id){
   for (var i=0;i<allRanges.length;i++){
     filters.push([allRanges[i].id.split(' ')[0],allRanges[i].value])
   }
-  var string = "-webkit-filter:"
+  var string = "-webkit-filter:",
+      index = getIndexOfImageToggles(id)
   for(var i=0;i<filters.length;i++){
-    if(filters[i][0]=='hue-rotate')
+    if(filters[i][0]=='hue-rotate'){
       string+=filters[i][0]+"("+filters[i][1]+"deg) "
-    else
+      imagesWithToggles[index][i+1] = filters[i][1]
+    }
+    else{
       string+=filters[i][0]+"("+filters[i][1]+"%) "
+      imagesWithToggles[index][i+1] = filters[i][1]
+    }
   }
   document.getElementById(id).setAttribute("style",string)
 }

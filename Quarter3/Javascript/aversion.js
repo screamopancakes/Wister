@@ -1,7 +1,7 @@
 /*
-THINGS TO KNOW
-- collisions are just messed up, but that's what I get for using a triangle
-- also keep user scores
+THINGS TO DO
+- fix the game? .-. Ehh, don't know what broke, but unplayable at the moment
+- keep user scores
 */
 
 var enemies = []
@@ -53,7 +53,7 @@ var gameArea = {
         this.playerTriangle = new player(this.canvas.width/2,this.canvas.height-20,12)
         window.addEventListener('keydown', parseKey)
         this.frameNum = 0
-        this.interval = setInterval(updateGameArea, 20)
+        this.interval = setInterval(updateGameArea,20)
     },
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -164,7 +164,6 @@ function player(x, y, radius){
 
     this.collision = function(circle){
         //player triangle, enemy object
-        //find the shortest distance between a point and a line segment
         var ptx1 = radius*Math.cos(1+this.rotation) + this.x,
             ptx2 = radius*Math.cos(2+this.rotation) + this.x,
             ptx3 = radius*Math.cos(3+this.rotation) + this.x,
@@ -173,11 +172,18 @@ function player(x, y, radius){
             pty3 = radius*Math.sin(3+this.rotation) + this.y,
             lineSegments = [[ptx1,pty1,ptx2,pty2],[ptx2,pty2,ptx3,pty3],[ptx3,pty3,ptx1,pty1]],
             distanceFromAllSegments = []
-        /*
+        
+        function sortNumber(a,b) {
+            return a - b;
+        }
+        
         function distToSegment(point, lineStart, lineEnd) { 
-          var inverseSlope = (lineEnd.x-lineStart.x)/(lineEnd.y-lineStart.y),
-              midpoint = {x:}
-          return inverseSlope
+          var a = Math.pow(Math.pow((point.x-lineStart.x),2)+Math.pow((point.y-lineStart.y),2),0.5),
+              b = Math.pow(Math.pow((point.x-lineEnd.x),2)+Math.pow((point.y-lineEnd.y),2),0.5),
+              c = Math.pow(Math.pow((lineStart.x-lineEnd.x),2)+Math.pow((lineStart.y-lineEnd.y),2),0.5),
+              angleC = Math.acos((a/(b*b+c*c-2*b*c)/(2*Math.PI)-Math.PI)),
+              height = Math.sin(angleC)*b
+          return height
         }
         for (var c=0;c<3;c++){
             var point = {x: circle.x, y: circle.y },
@@ -185,24 +191,15 @@ function player(x, y, radius){
                 lineEnd = {x: lineSegments[c][2], y: lineSegments[c][3]},
                 d = distToSegment(point, lineStart, lineEnd);
             distanceFromAllSegments.push(d)
-            
-            ctx.moveTo()
-            ctx.beginPath()
-            ctx.lineTo()
-            ctx.endPath()
-            ctx.stroke()
-            
         }
-        function sortNumber(a,b) {
-            return a - b;
-        }
+       
         distanceFromAllSegments.sort(sortNumber);
         var collision = true
         
-        if (distanceFromAllSegments[0]>11){
+        if (distanceFromAllSegments[0]>12){
             collision=false
         }
-        return collision*/
+        return collision
     }
     this.drawSelf()
     ctx.stroke()
@@ -211,8 +208,10 @@ function player(x, y, radius){
 
 function updateGameArea(){
     for (var i = 0; i < enemies.length; i += 1) {
-      if (gameArea.playerTriangle.collision(enemies[i]))
+      if (gameArea.playerTriangle.collision(enemies[i])){
         gameArea.stop()
+        console.log('Hass.')
+      }
     }
     gameArea.clear()
     gameArea.frameNum += 1;
@@ -223,23 +222,10 @@ function updateGameArea(){
       ctx.fillText(Math.floor(gameArea.frameNum/(25)),(gameArea.canvas.width-20),20)
     }
     if (gameArea.frameNum == 1 || gameArea.frameNum/(250)%1==0) {
-        var randxory = Math.floor(Math.random())
-        if (randxory < 0.5){
-            var x = Math.floor(Math.random() * (gameArea.canvas.width + 1)),
-                y;
-            if (randxory < 0.25){
-                y = 0
-            } else if (randxory >= 0.25)
-                y = gameArea.canvas.height
-        } else if (randxory >= 0.5){
-            var y = Math.floor(Math.random() * (gameArea.canvas.height + 1)),
-                x;
-            if (randxory < 0.25){
-                x = 0
-            } else if (randxory >= 0.25)
-                x = gameArea.canvas.height
-        }
-        enemies.push(new enemy(x, y, 5, 5, 12));
+      var randxory = Math.floor(Math.random()),
+          x = Math.floor(Math.random() * (gameArea.canvas.width)),
+          y = 0
+      enemies.push(new enemy(x, y, 5, 5, 12));
     }
     for (var i = 0; i < enemies.length; i += 1) {
         enemies[i].x += -1;
